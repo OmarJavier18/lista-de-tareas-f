@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Lista de Tareas</title>
+<style>
+    body {
+    background-color: #f2f2f2; 
+    font-family: Arial, sans-serif;
+    }
+    
+    h1 {
+    color: #333333; 
+    }
+    
+    input[type="text"] {
+    padding: 5px;
+    border: 1px solid #cccccc;
+    border-radius: 3px;
+    }
+    
+    button {
+    background-color: #e6f2ff; 
+    color: #333333; 
+    border: none;
+    padding: 5px 10px;
+    border-radius: 3px;
+    cursor: pointer;
+    }
+    
+    button:hover {
+    background-color: #b3d9ff;
+    }r el cursor */
+    
+    ul {
+    list-style-type: none;
+    padding: 0;
+    }
+    
+    li {
+    margin-bottom: 5px;
+    }
+</style>
+</head>
+<body>
+<h1>Lista de Tareas</h1>
+
+<input type="text" id="tarea" placeholder="Escribe una tarea">
+<button onclick="agregarTarea()">Agregar Tarea</button>
+
+<h2>Tareas Pendientes:</h2>
+<ul id="tareasPendientes"></ul>
+
+<h2>Tareas Completadas:</h2>
+<ul id="tareasCompletadas"></ul>
+
+<script>
+    var contador = 1;
+    
+    function agregarTarea() {
+    var tarea = document.getElementById("tarea").value;
+    if (tarea !== "") {
+        var nuevaTarea = document.createElement("li");
+        nuevaTarea.innerHTML = tarea + ' <button onclick="completarTarea(' + contador + ')">Completar</button>' + ' <button onclick="eliminarTarea(' + contador + ')">Eliminar</button>';
+        document.getElementById("tareasPendientes").appendChild(nuevaTarea);
+        document.getElementById("tarea").value = "";
+        contador++;
+    }
+    }
+    
+    function completarTarea(numero) {
+    var tareaCompletada = document.getElementById("tareasPendientes").getElementsByTagName("li")[numero - 1];
+    document.getElementById("tareasCompletadas").appendChild(tareaCompletada);
+    }
+    
+    function eliminarTarea(numero) {
+    var tareaEliminar = document.getElementById("tareasPendientes").getElementsByTagName("li")[numero - 1];
+    tareaEliminar.parentNode.removeChild(tareaEliminar);
+    }
+</script>
+</body>
+</html>
